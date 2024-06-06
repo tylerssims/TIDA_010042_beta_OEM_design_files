@@ -1,0 +1,223 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "MSPM0G150X" --package "VQFN-48(RGZ)" --part "Default" --product "mspm0_sdk@1.00.01.03"
+ * @versions {"tool":"1.16.1+2960"}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const ADC12  = scripting.addModule("/ti/driverlib/ADC12", {}, false);
+const ADC121 = ADC12.addInstance();
+const ADC122 = ADC12.addInstance();
+const Board  = scripting.addModule("/ti/driverlib/Board");
+const COMP   = scripting.addModule("/ti/driverlib/COMP", {}, false);
+const COMP1  = COMP.addInstance();
+const GPIO   = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1  = GPIO.addInstance();
+const GPIO2  = GPIO.addInstance();
+const GPIO3  = GPIO.addInstance();
+const GPIO4  = GPIO.addInstance();
+const OPA    = scripting.addModule("/ti/driverlib/OPA", {}, false);
+const OPA1   = OPA.addInstance();
+const OPA2   = OPA.addInstance();
+const PWM    = scripting.addModule("/ti/driverlib/PWM", {}, false);
+const PWM1   = PWM.addInstance();
+const SYSCTL = scripting.addModule("/ti/driverlib/SYSCTL");
+const TIMER  = scripting.addModule("/ti/driverlib/TIMER", {}, false);
+const TIMER1 = TIMER.addInstance();
+const TIMER2 = TIMER.addInstance();
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+const divider9       = system.clockTree["UDIV"];
+divider9.divideValue = 2;
+
+const multiplier2         = system.clockTree["PLL_QDIV"];
+multiplier2.multiplyValue = 5;
+
+const mux8       = system.clockTree["HSCLKMUX"];
+mux8.inputSelect = "HSCLKMUX_SYSPLL0";
+
+ADC121.$name                 = "ADC12_0";
+ADC121.sampClkSrc            = "DL_ADC12_CLOCK_ULPCLK";
+ADC121.trigSrc               = "DL_ADC12_TRIG_SRC_EVENT";
+ADC121.subChanID             = 1;
+ADC121.sampCnt               = 1;
+ADC121.enabledDMATriggers    = ["DL_ADC12_DMA_MEM0_RESULT_LOADED"];
+ADC121.endAdd                = 3;
+ADC121.adcMem0chansel        = "DL_ADC12_INPUT_CHAN_13";
+ADC121.configWinCompHighThld = 1300;
+ADC121.configWinCompLowThld  = 800;
+ADC121.enabledInterrupts     = ["DL_ADC12_INTERRUPT_INIFG","DL_ADC12_INTERRUPT_MEM0_RESULT_LOADED","DL_ADC12_INTERRUPT_WINDOW_COMP_HIGH","DL_ADC12_INTERRUPT_WINDOW_COMP_LOW"];
+ADC121.powerDownMode         = "DL_ADC12_POWER_DOWN_MODE_MANUAL";
+ADC121.sampleTime1           = "0ns";
+ADC121.sampleTime0           = "150ns";
+ADC121.peripheral.$assign    = "ADC0";
+
+ADC122.$name                      = "ADC12_1";
+ADC122.sampClkSrc                 = "DL_ADC12_CLOCK_ULPCLK";
+ADC122.samplingOperationMode      = "sequence";
+ADC122.trigSrc                    = "DL_ADC12_TRIG_SRC_EVENT";
+ADC122.endAdd                     = 3;
+ADC122.adcMem0chansel             = "DL_ADC12_INPUT_CHAN_13";
+ADC122.adcMem1chansel             = "DL_ADC12_INPUT_CHAN_6";
+ADC122.adcMem2chansel             = "DL_ADC12_INPUT_CHAN_5";
+ADC122.adcMem3chansel             = "DL_ADC12_INPUT_CHAN_4";
+ADC122.enabledInterrupts          = ["DL_ADC12_INTERRUPT_MEM3_RESULT_LOADED"];
+ADC122.subChanID                  = 2;
+ADC122.adcMem0stime               = "DL_ADC12_SAMPLE_TIMER_SOURCE_SCOMP1";
+ADC122.adcMem1stime               = "DL_ADC12_SAMPLE_TIMER_SOURCE_SCOMP1";
+ADC122.adcMem2stime               = "DL_ADC12_SAMPLE_TIMER_SOURCE_SCOMP1";
+ADC122.adcMem3stime               = "DL_ADC12_SAMPLE_TIMER_SOURCE_SCOMP1";
+ADC122.powerDownMode              = "DL_ADC12_POWER_DOWN_MODE_MANUAL";
+ADC122.sampleTime0                = "0ns";
+ADC122.sampleTime1                = "150ns";
+ADC122.peripheral.$assign         = "ADC1";
+ADC122.peripheral.adcPin6.$assign = "PB19";
+ADC122.peripheral.adcPin5.$assign = "PB18";
+ADC122.peripheral.adcPin4.$assign = "PB17";
+
+Board.configureUnused             = true;
+Board.peripheral.$assign          = "DEBUGSS";
+Board.peripheral.swclkPin.$assign = "PA20";
+Board.peripheral.swdioPin.$assign = "PA19";
+
+COMP1.$name              = "COMP_0";
+COMP1.negChannel         = "DL_COMP_IMSEL_CHANNEL_6";
+COMP1.selectOutputFilter = "DL_COMP_FILTER_DELAY_1200";
+COMP1.vSource            = "DL_COMP_REF_SOURCE_VDDA_DAC";
+COMP1.controlSelect      = "DL_COMP_DAC_CONTROL_SW";
+COMP1.channelEnable      = ["NEG"];
+COMP1.pubChanID          = 3;
+COMP1.hysteresis         = "DL_COMP_HYSTERESIS_10";
+COMP1.enableOutputFilter = true;
+COMP1.enabledEvents      = ["DL_COMP_EVENT_OUTPUT_EDGE","DL_COMP_EVENT_OUTPUT_EDGE_INV "];
+COMP1.enabledInterrupts  = ["DL_COMP_INTERRUPT_OUTPUT_EDGE","DL_COMP_INTERRUPT_OUTPUT_EDGE_INV"];
+COMP1.setDACCode0        = 0xBF;
+COMP1.peripheral.$assign = "COMP0";
+
+GPIO1.$name                                 = "GPIO_GRP_0";
+GPIO1.associatedPins.create(2);
+GPIO1.associatedPins[0].$name               = "PIN_0";
+GPIO1.associatedPins[0].initialValue        = "SET";
+GPIO1.associatedPins[0].assignedPort        = "PORTB";
+GPIO1.associatedPins[0].pin.$assign         = "PB16";
+GPIO1.associatedPins[1].$name               = "PIN_4";
+GPIO1.associatedPins[1].assignedPort        = "PORTB";
+GPIO1.associatedPins[1].assignedPortSegment = "Lower";
+GPIO1.associatedPins[1].pin.$assign         = "PB15";
+
+GPIO2.$name                                 = "GPIO_GRP_1";
+GPIO2.associatedPins.create(5);
+GPIO2.associatedPins[0].$name               = "PIN_1";
+GPIO2.associatedPins[0].subChanID           = 3;
+GPIO2.associatedPins[0].subOutputPolicy     = "TOGGLE";
+GPIO2.associatedPins[0].pin.$assign         = "PA26";
+GPIO2.associatedPins[1].$name               = "PIN_2";
+GPIO2.associatedPins[1].assignedPort        = "PORTA";
+GPIO2.associatedPins[1].assignedPortSegment = "Upper";
+GPIO2.associatedPins[1].pin.$assign         = "PA27";
+GPIO2.associatedPins[2].$name               = "PIN_5";
+GPIO2.associatedPins[2].assignedPort        = "PORTA";
+GPIO2.associatedPins[2].assignedPortSegment = "Upper";
+GPIO2.associatedPins[2].pin.$assign         = "PA31";
+GPIO2.associatedPins[3].$name               = "PIN_6";
+GPIO2.associatedPins[3].pin.$assign         = "PA5";
+GPIO2.associatedPins[4].$name               = "PIN_7";
+GPIO2.associatedPins[4].pin.$assign         = "PA8";
+
+GPIO3.$name                                 = "GPIO_GRP_2";
+GPIO3.associatedPins.create(2);
+GPIO3.associatedPins[0].assignedPort        = "PORTA";
+GPIO3.associatedPins[0].assignedPortSegment = "Lower";
+GPIO3.associatedPins[0].$name               = "LED2";
+GPIO3.associatedPins[0].pin.$assign         = "PA13";
+GPIO3.associatedPins[1].$name               = "LED3";
+GPIO3.associatedPins[1].assignedPort        = "PORTA";
+GPIO3.associatedPins[1].assignedPortSegment = "Lower";
+GPIO3.associatedPins[1].pin.$assign         = "PA14";
+
+GPIO4.port                          = "PORTB";
+GPIO4.portSegment                   = "Lower";
+GPIO4.$name                         = "GPIO_TEMP";
+GPIO4.associatedPins[0].$name       = "PIN_3";
+GPIO4.associatedPins[0].direction   = "INPUT";
+GPIO4.associatedPins[0].interruptEn = true;
+GPIO4.associatedPins[0].polarity    = "RISE_FALL";
+GPIO4.associatedPins[0].pin.$assign = "PB2";
+
+OPA1.$name                        = "OPA_0";
+OPA1.advRRI                       = true;
+OPA1.advBW                        = "HIGH";
+OPA1.cfg0PSELChannel              = "IN1_POS";
+OPA1.cfg0NSELChannel              = "IN1_NEG";
+OPA1.cfg0OutputPin                = "ENABLED";
+OPA1.cfg0Chop                     = "STANDARD";
+OPA1.peripheral.$assign           = "OPA0";
+OPA1.peripheral.In1PosPin.$assign = "PA25";
+OPA1.peripheral.In1NegPin.$assign = "PA24";
+OPA1.peripheral.OutPin.$assign    = "PA22";
+
+OPA2.$name                        = "OPA_1";
+OPA2.cfg0PSELChannel              = "IN1_POS";
+OPA2.cfg0NSELChannel              = "IN1_NEG";
+OPA2.cfg0Chop                     = "STANDARD";
+OPA2.advBW                        = "HIGH";
+OPA2.advRRI                       = true;
+OPA2.cfg0OutputPin                = "ENABLED";
+OPA2.peripheral.$assign           = "OPA1";
+OPA2.peripheral.In1PosPin.$assign = "PA18";
+OPA2.peripheral.In1NegPin.$assign = "PA17";
+OPA2.peripheral.OutPin.$assign    = "PA16";
+
+PWM1.$name                           = "PWM_1";
+PWM1.deadBandEn                      = true;
+PWM1.ccIndex                         = [2,3];
+PWM1.ccIndexCmpl                     = [2,3];
+PWM1.interrupts                      = ["ZERO_EVENT"];
+PWM1.event1ControllerInterruptEn     = ["ZERO_EVENT"];
+PWM1.faultSource                     = ["3"];
+PWM1.faultTimerCountEntry            = "FAULT_ENTRY_CTR_SUSP_COUNT";
+PWM1.faultTimerCountExit             = "FAULT_EXIT_CTR_CVAE_ACTION";
+PWM1.faultInputFilterEn              = true;
+PWM1.faultChannel2BehaviorEntry      = "LOW";
+PWM1.faultChannel3BehaviorEntry      = "LOW";
+PWM1.faultInputDetect                = true;
+PWM1.faultInputEn                    = "FIEN_ENABLED";
+PWM1.event2ControllerInterruptEn     = ["ZERO_EVENT"];
+PWM1.COMP0Sense                      = "SENSE_HIGH";
+PWM1.faultTriggerIn                  = "TFIM_ENABLED";
+PWM1.dbRiseDelayTimerCount           = 2;
+PWM1.dbFallDelayTimerCount           = 2;
+PWM1.timerCount                      = 320;
+PWM1.peripheral.$assign              = "TIMA0";
+PWM1.peripheral.ccp2Pin.$assign      = "PA7";
+PWM1.peripheral.ccp3Pin.$assign      = "PA4";
+PWM1.peripheral.ccp2Pin_cmpl.$assign = "PA6";
+PWM1.peripheral.ccp3Pin_cmpl.$assign = "PB3";
+PWM1.PWM_CHANNEL_2.$name             = "ti_driverlib_pwm_PWMTimerCC0";
+PWM1.PWM_CHANNEL_3.$name             = "ti_driverlib_pwm_PWMTimerCC1";
+
+SYSCTL.MFPCLKEn    = true;
+SYSCTL.MFCLKEn     = true;
+SYSCTL.clockTreeEn = true;
+
+TIMER1.$name                       = "TIMER_0";
+TIMER1.event1ControllerInterruptEn = ["ZERO_EVENT"];
+TIMER1.timerMode                   = "PERIODIC";
+TIMER1.event1PublisherChannel      = 1;
+TIMER1.event2PublisherChannel      = 2;
+TIMER1.event2ControllerInterruptEn = ["ZERO_EVENT"];
+TIMER1.timerPeriod                 = "32us";
+TIMER1.peripheral.$assign          = "TIMA1";
+
+TIMER2.$name              = "TIMER_1";
+TIMER2.timerMode          = "PERIODIC";
+TIMER2.interrupts         = ["ZERO"];
+TIMER2.timerClkDiv        = 8;
+TIMER2.timerClkPrescale   = 10;
+TIMER2.timerPeriod        = "2ms";
+TIMER2.peripheral.$assign = "TIMG0";
